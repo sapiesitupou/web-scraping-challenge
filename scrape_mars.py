@@ -14,7 +14,7 @@ from selenium import webdriver
 def init_browser():
     # splinter
     executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
-    return Browser('chrome', **executable_path, headless=False)
+    browser = Browser('chrome', **executable_path, headless=False)
 
 def scrape():
     # Mars News Titles
@@ -30,7 +30,7 @@ def scrape():
     soup = BeautifulSoup(html, 'html.parser')
 
     mars_collection["news_title"] = soup.find('div', class_="content_title").get_text()
-    mars_collection["news_snip"] = soup.find('div', class_="rollover_description_inner").get_text()
+    mars_collection["news_snip"] = soup.find('div', class_="article_teaser_body").get_text()
 
     # Mars Feature Image
     url_feature_image = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"
